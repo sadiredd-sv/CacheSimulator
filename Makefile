@@ -12,19 +12,19 @@ csim: csim.c cachelab.c cachelab.h
 test-trans: test-trans.c trans.o cachelab.c cachelab.h
 	$(CC) $(CFLAGS) -o test-trans test-trans.c cachelab.c trans.o 
 
-tracegen: tracegen.c trans.o cachelab.c
+tracegen: tracegen.c trans.o cachelab.c cachelab.h
 	$(CC) $(CFLAGS) -O0 -o tracegen tracegen.c trans.o cachelab.c
 
-trans.o: trans.c
+trans.o: trans.c cachelab.h contracts.h
 	$(CC) $(CFLAGS) -O0 -c trans.c
 
-handin:
+handin: 
 	tar -cvf ${USER}_handin.tar  csim.c trans.c 
 
 #
 # Clean the src dirctory
 #
-clean:
+clean: 
 	rm -rf *.o
 	rm -f csim
 	rm -f test-trans tracegen
